@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-    --clr-primary: #1391ff;
-    --clr-secondary: #ffa70e;
-    --clr-bg: #e7e7e7;
+    --clr-primary: #6ddf6d;
+    --clr-secondary: #ff9f64;
+    --clr-tertiory: #ff6464;
+    --clr-bg: #eeeeee;
     --clr-dark: #0b1118;
     --clr-light: #f8f8f8;
-    --clr-txt-in: #5cbc5c;
-    --clr-txt-out: #ea6464;
     --clr-shadow: #c5c5c5;
+    --clr-shadow-darker: #404040;
     --shadow-main: 4px 6px 20px #c5c5c5;
     --shadow-inner: 4px 5px 8px #cecece;
 }
@@ -25,9 +25,9 @@ body {
     font-family: 'Inter', sans-serif;
 }
 .container {
-    height: 800px;
-    width: 450px;
-    padding: 1rem;
+    height: 850px;
+    width: 410px;
+    padding: 2rem 1rem 1rem 1rem;
     position: relative;
     border: none;
     border-radius: 40px;
@@ -37,6 +37,7 @@ body {
     align-items: center;
     gap: 1rem;
     background-color: var(--clr-bg);
+    overflow: hidden;
 }
 .user,
 .account {
@@ -99,14 +100,6 @@ body {
 .in-amt {
     border-right: 2px solid var(--clr-shadow);
 }
-/* .in-amt h1{
-    color: var(--clr-txt-in);
-    text-shadow: 3px 4px 7px;
-}
-.out-amt h1{
-    color: var(--clr-txt-out);
-    text-shadow: 3px 4px 7px;
-} */
 .history {
     width: 100%;
     height: 400px;
@@ -138,17 +131,41 @@ body {
 .exp-tab {
     height: 80%;
     padding-top: 0.7rem;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     align-content: start;
-    justify-content: center;
+    justify-content: start;
     gap: 0.7rem;
 }
 .expense {
     height: 70px;
-    width: 400px;
-    padding: 0.5rem;
+    width: 100%;
+    display: flex;
     border-radius: 15px;
     background-color: var(--clr-bg);
+    box-shadow: 1px 2px 5px var(--clr-shadow);
+}
+.main {
+    width: 85%;
+    padding: 0.5rem;
+    color: var(--clr-shadow-darker);
+    border-radius: 15px 0px 0px 15px;
+}
+.btn-del {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--clr-tertiory);
+    font-size: 1.5rem;
+    background-color: var(--clr-dark);
+    border-radius: 0px 15px 15px 0px;
+    cursor: pointer;
+    transition: ease 250ms;
+}
+.btn-del:hover {
+    color: #fc3535;
 }
 .expense .amt,
 .expense .itm,
@@ -166,27 +183,25 @@ body {
     padding-top: 0.2rem;
     font-size: 14px;
 }
-
-
-
 .options {
     bottom: 1rem;
     width: 93%;
-    height: 70px;
+    height: 80px;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: var(--shadow-inner);
     background-color: var(--clr-dark);
-    border-radius: 25px;
+    border-radius: 30px;
     gap: 1rem;
+    z-index: 2;
 }
 .options button {
-    height: 40px;
+    height: 45px;
     width: 100px;
     background-color: transparent;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     color: var(--clr-light);
     transition: ease 250ms;
@@ -196,6 +211,10 @@ body {
     border: 2px solid #00c900;
 }
 .options button:nth-child(2) {
+    background-color: #ff9f64;
+    border: 2px solid #ea6512;
+}
+.options button:nth-child(3) {
     background-color: #ff6464;
     border: 2px solid #dd1c1c;
 }
@@ -203,5 +222,20 @@ body {
     background-color: #00c900;
 }
 .options button:nth-child(2):hover {
+    background-color: #ea6512;
+}
+.options button:nth-child(3):hover {
     background-color: #dd1c1c;
 }
+/* .Add-cash {
+    bottom: 0px;
+    height: 400px;
+    width: 100%;
+    color: var(--clr-light);
+    position: absolute;
+    background-color: #0ef30e6a;
+    backdrop-filter: blur(7px);
+    border-radius: 30px;
+    z-index: 1;
+    transform: translateY(200px); 
+} */
