@@ -1,0 +1,24 @@
+:root {
+    --clr-primary: #1391ff;
+    --clr-secondary: #1391ff;
+    --clr-dark: #1391ff;
+    --clr-light: #ededed;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    height: 800px;
+    width: 450px;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 4px 6px 20px #c5c5c5;
+}
