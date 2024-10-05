@@ -6,11 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Description" content="Expense Tracker App made in Vanilla JS">
     <title>Expense Tracker</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="amount"></div>
+        <div class="account">
+            <div class="user">
+                <div class="pfp"><i class='bx bxs-user-circle'></i></div>
+                <h1 class="name">Prateek</h1>
+            </div>
+            <button><i class='bx bx-cog'></i></button>
+        </div>
+        <div class="amount">
+            <div class="in-amt">
+                <h1><i class='bx bx-rupee'></i>2200</h1>
+                <h2>Balance</h2>
+            </div>
+            <div class="out-amt">
+                <h1><i class='bx bx-rupee'></i>800</h1>
+                <h2>Expense</h2>
+            </div>  
+        </div>
+        <div class="history">
+            <div class="hist-panel">
+                <h3>History</h3>
+                <div class="tool">
+                    <!-- <label for="list"><i class='bx bx-filter-alt'></i></label> -->
+                    <select name="list" id="drop-down">
+                        <option value="Recent">Date added</option>
+                        <option value="">High to Low</option>
+                        <option value="Largest Amount">Low to High</option>
+                    </select>
+                </div>
+            </div>
+            <div class="exp-tab">
+                <div class="expense">
+                    <div class="amt">
+                        <h5>Amount</h5>
+                        <h5><i class='bx bx-rupee'></i>200</h5>
+                    </div>
+                    <div class="itm">
+                        <h6>Items</h6>
+                        <h6>4</h6>
+                    </div>
+                    <div class="description">
+                        <p>Chips, Onion, Wheat, Soda</p>
+                    </div>
+                </div>
+                <div class="expense">
+                    <div class="amt">
+                        <h5>Amount</h5>
+                        <h5><i class='bx bx-rupee'></i>600</h5>
+                    </div>
+                    <div class="itm">
+                        <h6>Items</h6>
+                        <h6>4</h6>
+                    </div>
+                    <div class="description">
+                        <p>Rice, Wheat, Potatos</p>
+                    </div>
+                </div>
+                <div class="expense exp-3"></div> 
+            </div>  
+        </div>
+        <div class="options">
+            <button class="add">Add</button>
+            <button class="add">Delete</button>
+        </div>
     </div>
 </body>
 </html>
