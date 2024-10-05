@@ -1,12 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
     --clr-primary: #1391ff;
-    --clr-secondary: #1391ff;
-    --clr-dark: #1391ff;
-    --clr-light: #ededed;
+    --clr-secondary: #ffa70e;
+    --clr-bg: #e7e7e7;
+    --clr-dark: #0b1118;
+    --clr-light: #f8f8f8;
+    --clr-txt-in: #5cbc5c;
+    --clr-txt-out: #ea6464;
+    --clr-shadow: #c5c5c5;
+    --shadow-main: 4px 6px 20px #c5c5c5;
+    --shadow-inner: 4px 5px 8px #cecece;
 }
 * {
     padding: 0;
-    margin: 0;
+    margin: 0;  
     box-sizing: border-box;
 }
 body {
@@ -14,11 +22,186 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Inter', sans-serif;
 }
 .container {
     height: 800px;
     width: 450px;
+    padding: 1rem;
+    position: relative;
     border: none;
     border-radius: 40px;
-    box-shadow: 4px 6px 20px #c5c5c5;
+    box-shadow: var(--shadow-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--clr-bg);
+}
+.user,
+.account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.account {
+    height: 40px;
+    width: 100%;
+    padding-inline: 0.5rem;
+    border: none;
+    border-radius: 20px;
+}
+.user {
+    gap: 0.5rem;
+}
+.pfp {
+    height: 30px;
+    width: 30px;
+    font-size: 2.2rem;
+    border: none;
+    border-radius: 50%;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+.account button {
+    background-color: transparent;
+    border-radius: 50%;
+    display: grid;
+    align-content: center;
+    border: none;
+    font-size: 1.6rem;
+    color: #383838;
+    cursor: pointer;
+}
+.amount {
+    width: 100%;
+    height: 170px;
+    border: none;
+    background-color: var(--clr-dark);
+    box-shadow: var(--shadow-inner);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--clr-light);
+}
+.in-amt,
+.out-amt {
+    height: 80%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.in-amt {
+    border-right: 2px solid var(--clr-shadow);
+}
+/* .in-amt h1{
+    color: var(--clr-txt-in);
+    text-shadow: 3px 4px 7px;
+}
+.out-amt h1{
+    color: var(--clr-txt-out);
+    text-shadow: 3px 4px 7px;
+} */
+.history {
+    width: 100%;
+    height: 400px;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 30px;
+    box-shadow: var(--shadow-inner);
+    background-color: var(--clr-light);
+}
+.hist-panel {
+    width: 100%;
+    height: 50px;
+    padding-inline: 1rem;
+    border-radius: 15px 15px 0px 0px;
+    border-bottom: 1px solid var(--clr-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#drop-down {
+    height: 25px;
+    width: 100px;
+    border-radius: 5px;
+    border-color: var(--clr-shadow);
+}
+/* .bx-filter-alt {
+    font-size: 20px;
+} */
+.exp-tab {
+    height: 80%;
+    padding-top: 0.7rem;
+    display: grid;
+    align-content: start;
+    justify-content: center;
+    gap: 0.7rem;
+}
+.expense {
+    height: 70px;
+    width: 400px;
+    padding: 0.5rem;
+    border-radius: 15px;
+    background-color: var(--clr-bg);
+}
+.expense .amt,
+.expense .itm,
+.expense .description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.itm {
+    font-weight: 300;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid var(--clr-shadow);
+}
+.expense .description p {
+    padding-top: 0.2rem;
+    font-size: 14px;
+}
+
+
+
+.options {
+    bottom: 1rem;
+    width: 93%;
+    height: 70px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow-inner);
+    background-color: var(--clr-dark);
+    border-radius: 25px;
+    gap: 1rem;
+}
+.options button {
+    height: 40px;
+    width: 100px;
+    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--clr-light);
+    transition: ease 250ms;
+}
+.options button:nth-child(1) {
+    background-color: #6ddf6d;
+    border: 2px solid #00c900;
+}
+.options button:nth-child(2) {
+    background-color: #ff6464;
+    border: 2px solid #dd1c1c;
+}
+.options button:nth-child(1):hover {
+    background-color: #00c900;
+}
+.options button:nth-child(2):hover {
+    background-color: #dd1c1c;
 }
