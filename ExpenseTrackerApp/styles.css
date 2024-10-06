@@ -37,7 +37,6 @@ body {
     align-items: center;
     gap: 1rem;
     background-color: var(--clr-bg);
-    overflow: hidden;
 }
 .user,
 .account {
@@ -100,6 +99,15 @@ body {
 .in-amt {
     border-right: 2px solid var(--clr-shadow);
 }
+.in-amt h1,
+.out-amt h1 {
+    display: flex;
+    align-items: center;
+}
+.in-amt h1 i,
+.out-amt h1 i {
+    margin-left: -6px;
+}
 .history {
     width: 100%;
     height: 400px;
@@ -125,9 +133,6 @@ body {
     border-radius: 5px;
     border-color: var(--clr-shadow);
 }
-/* .bx-filter-alt {
-    font-size: 20px;
-} */
 .exp-tab {
     height: 80%;
     padding-top: 0.7rem;
@@ -187,21 +192,62 @@ body {
     bottom: 1rem;
     width: 93%;
     height: 80px;
+    padding: 1rem;
     position: absolute;
+    display: grid;
+    gap: 1rem;
+    box-shadow: var(--shadow-inner);
+    background: linear-gradient(var(--clr-dark), var(--clr-dark));
+    /* background-color: var(--clr-dark); */
+    border-radius: 30px;
+    gap: 1rem;
+    transition: 250ms ease;
+    overflow: hidden;
+}
+.active {
+    height: 320px;
+    background: linear-gradient(#353535b3, #000000df);
+    box-shadow: 4px 5px 15px #6a6a6a;
+    backdrop-filter: blur(5px);
+}
+.new-blnc {
+    height: 200px;
+    width: 100%;
+    padding: 1rem;
+    /* display: none; */
+    border-radius: 20px;
+    /* border: 1px solid #0000ff; */
+    color: var(--clr-light);
+    transition: 250ms ease;
+    border: 1px solid blue;
+}
+.add-new input {
+    height: 30px;
+    width: 200px;
+    margin-block: 10px;
+    color: white;
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgb(253, 253, 253);
+}
+.btn-tab {
+    bottom: 0.95rem;
+    left: 50%;
+    height: 50px;
+    transform: translateX(-50%);
+    position: absolute;
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: var(--shadow-inner);
-    background-color: var(--clr-dark);
-    border-radius: 30px;
     gap: 1rem;
-    z-index: 2;
 }
 .options button {
     height: 45px;
     width: 100px;
     background-color: transparent;
-    border-radius: 10px;
+    border-radius: 15px;
     cursor: pointer;
     color: var(--clr-light);
     transition: ease 250ms;
@@ -227,15 +273,3 @@ body {
 .options button:nth-child(3):hover {
     background-color: #dd1c1c;
 }
-/* .Add-cash {
-    bottom: 0px;
-    height: 400px;
-    width: 100%;
-    color: var(--clr-light);
-    position: absolute;
-    background-color: #0ef30e6a;
-    backdrop-filter: blur(7px);
-    border-radius: 30px;
-    z-index: 1;
-    transform: translateY(200px); 
-} */
