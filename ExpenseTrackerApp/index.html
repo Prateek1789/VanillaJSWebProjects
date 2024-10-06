@@ -20,11 +20,11 @@
         </div>
         <div class="amount">
             <div class="in-amt">
-                <h1><i class='bx bx-rupee'></i>2200</h1>
+                <h1><i class='bx bx-rupee'></i><span id="in-num">2200</span></h1>
                 <h2>Balance</h2>
             </div>
             <div class="out-amt">
-                <h1><i class='bx bx-rupee'></i>-800</h1>
+                <h1><i class='bx bx-rupee'></i><span id="out-num">800</span></h1>
                 <h2>Expense</h2>
             </div>  
         </div>
@@ -32,7 +32,6 @@
             <div class="hist-panel">
                 <h3>History</h3>
                 <div class="tool">
-                    <!-- <label for="list"><i class='bx bx-filter-alt'></i></label> -->
                     <select name="list" id="drop-down">
                         <option value="Recent">Date added</option>
                         <option value="">High to Low</option>
@@ -76,14 +75,18 @@
             </div>  
         </div>
         <div class="options">
-            <button class="add">Add Balance</button>
-            <button class="add">Add Expense</button>
-            <button class="add">Delete</button>
+            <!-- <div class="add-new">
+                <h4>Enter Amount</h4>
+                <input type="number" placeholder="0.00">
+                <h5>No. of items</h5>
+            </div> -->
+            <div class="btn-tab">
+                <button class="btn CashUp">Add Balance</button>
+                <button class="btn CashDown">Add Expense</button>
+                <button class="btn Delete">Delete</button>
+            </div>
         </div>
-        <!-- <div class="Add-cash">
-            <h1>Amount</h1>
-            <span>2000</span>
-        </div> -->
     </div>
+    <script type="text/javascript" src="logic.js"></script>
 </body>
 </html>
