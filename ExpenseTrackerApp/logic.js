@@ -5,20 +5,50 @@ const btnGroup = [...document.getElementsByClassName("btn")];
 const functionTab = document.querySelector(".func-tab");
 
 let isBlncActive = false;
-let blncConfrm = false;
+/* let blncConfrm = false; */
 let isExpsActive = false;
 
 function initBlncTab(container) {
     const heading = document.createElement('H2');
-    heading.textContent = 'Enter Amount';
+    heading.textContent = 'New Amount';
     const input = document.createElement('INPUT');
     input.setAttribute('type', 'number');
     input.setAttribute('name', 'num');
     input.setAttribute('placeholder', '0.00');
-        
+
     container.appendChild(heading);
     container.appendChild(input);
-    container.classList.add('func-active');
+}
+
+function initExpTab(container) {
+    const $heading = document.createElement('H4');
+    $heading.textContent = 'Enter Amount';
+    const heading2 = document.createElement('H5');
+    heading2.textContent = 'No. of Items';
+    const heading3 = document.createElement('H5');
+    heading3.textContent = 'Description';
+    const input = document.createElement('INPUT');
+    input.setAttribute('type', 'number');
+    input.setAttribute('name', 'num');
+    input.setAttribute('placeholder', '0.00');
+    input.setAttribute('class', 'input1');
+    const input2 = document.createElement('INPUT');
+    input2.setAttribute('type', 'number');
+    input2.setAttribute('name', 'num');
+    input2.setAttribute('placeholder', '0.00');
+    input2.setAttribute('class', 'input2');
+    const textBox = document.createElement('INPUT');
+    textBox.setAttribute('type', 'text');
+    textBox.setAttribute('name', 'items');
+    textBox.setAttribute('placeholder', 'Items..');
+    textBox.setAttribute('class', 'products');
+
+    container.appendChild($heading);
+    container.appendChild(input);
+    container.appendChild(heading2);
+    container.appendChild(input2);
+    container.appendChild(heading3);
+    container.appendChild(textBox);
 }
 
 btnGroup.forEach(el => {
@@ -28,6 +58,7 @@ btnGroup.forEach(el => {
 
         if (el == btnGroup[0] && !isBlncActive) {
             initBlncTab(functionTab);
+            functionTab.classList.add('func-active');
             isBlncActive = true;
         }
         else if (el == btnGroup[0] && isBlncActive) {
@@ -35,34 +66,19 @@ btnGroup.forEach(el => {
             functionTab.classList.remove('func-active');
             isBlncActive = false;
         }
+        else if (el == btnGroup[1] && !isExpsActive) {
+            functionTab.setAttribute('class', 'add-Exp');
+            functionTab.removeAttribute('func-tab');
+            initExpTab(functionTab);
+            functionTab.classList.add('exp-active')
+            isExpsActive = true;
+        }
+        else if (el == btnGroup[1] && isExpsActive) {
+            functionTab.innerHTML = '';
+            functionTab.classList.remove('exp-active');
+            functionTab.removeAttribute('add-Exp');
+            functionTab.setAttribute('class', 'func-tab');
+            isExpsActive = false;
+        }
     })
 });
-
-/* function addBalance() {
-    if (!addBalanceInterface) {
-        const interfaceDiv = document.createElement('DIV');
-        interfaceDiv.setAttribute('class', 'new-blnce');
-
-        const heading = document.createElement('H2');
-        heading.textContent = 'Enter Amount';
-
-        const input = document.createElement('INPUT');
-        input.setAttribute('type', 'number');
-        input.setAttribute('name', 'blncAmt');
-        input.setAttribute('placeholder', '0.00');
-
-        optionPanel.appendChild(div);
-        div.appendChild(header);
-        div.appendChild(input);
-
-        btnGroup[0].textContent = "Cancel";
-        addBalanceInterface = true;
-    }
-    else if (addBalanceInterface) {
-        interfaceDiv.remove();
-        btnGroup[0].textContent = "Add Balance";
-        addBalanceInterface = false;
-    }
-    const textNode = document.createTextNode('Enter Amount');
-    header.appendChild(textNode);
-} */
