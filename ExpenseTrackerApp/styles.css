@@ -25,7 +25,6 @@ body {
     justify-content: center;
     align-items: center;
     font-family: 'Inter', sans-serif;
-    background-color: var(--clr-dark);
 }
 .container {
     height: 850px;
@@ -119,6 +118,7 @@ body {
     border-radius: 40px;
     box-shadow: var(--shadow-inner);
     background-color: var(--clr-light);
+    overflow-y: hidden;
 }
 .hist-panel {
     width: 100%;
@@ -137,16 +137,23 @@ body {
     border-color: var(--clr-shadow);
 }
 .exp-tab {
-    height: 80%;
+    height: 87%;
     padding-top: 0.7rem;
     display: flex;
     flex-direction: column;
     align-content: start;
     justify-content: start;
     gap: 0.7rem;
+    overflow-y: scroll;
+    border-radius: 0px 0px 30px 30px;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;      /* Firefox */
+}
+.exp-tab::-webkit-scrollbar {
+    display: none;
 }
 .expense {
-    height: 70px;
+    min-height: 70px;
     width: 100%;
     display: flex;
     border-radius: 20px;
@@ -157,7 +164,7 @@ body {
     width: 85%;
     padding: 0.5rem;
     color: var(--clr-shadow-darker);
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 15px 0px 0px 15px;
 }
 .btn-del {
     height: 100%;
@@ -168,7 +175,7 @@ body {
     color: var(--clr-tertiory);
     font-size: 1.5rem;
     background-color: var(--clr-dark);
-    border-radius: 0px 15px 15px 0px;
+    border-radius: 0px 20px 20px 0px;
     cursor: pointer;
     transition: ease 250ms;
 }
@@ -303,7 +310,7 @@ body {
     border-radius: 15px;
     cursor: pointer;
     color: var(--clr-text-light);
-    transition: ease 250ms;
+    transition: 250ms ease;
 }
 .options button:nth-child(1) {
     background-color: #6ddf6d;
