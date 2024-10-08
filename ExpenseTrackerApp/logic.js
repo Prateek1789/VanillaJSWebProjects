@@ -5,8 +5,10 @@ const btnGroup = [...document.getElementsByClassName("btn")];
 const functionTab = document.querySelector(".func-tab");
 
 let isBlncActive = false;
-/* let blncConfrm = false; */
+let btnConfirmActive = false;
+let btnCancelActive = false;
 let isExpsActive = false;
+let newBalance = 0;
 
 function initBlncTab(container) {
     const heading = document.createElement('H2');
@@ -53,20 +55,48 @@ function initExpTab(container) {
 
 btnGroup.forEach(el => {
     el.addEventListener("click", () => {
-        optionPanel.classList.toggle("active");
-        el.classList.toggle("open");
-
-        if (el == btnGroup[0] && !isBlncActive) {
-            initBlncTab(functionTab);
+        if (el == btnGroup[0] && !isBlncActive && !btnConfirmActive) {
+            optionPanel.classList.add("active");
             functionTab.classList.add('func-active');
+            initBlncTab(functionTab);
+            el.textContent = 'Confirm';
+            btnGroup[1].textContent = 'Close';
+            btnGroup[1].style.backgroundColor = 'var(--clr-tertiory)';
             isBlncActive = true;
+            btnConfirmActive = true;
+            btnCancelActive = true;
         }
-        else if (el == btnGroup[0] && isBlncActive) {
+        if (el == btnGroup[0] && functionTab.children[1].value && btnConfirmActive) {
+            let newBlnc = functionTab.children[1].value;
+            newBalance += Number(newBlnc);
+            balanceAmount.textContent = newBalance;
+            functionTab.innerHTML = '';
+            optionPanel.classList.remove("active");
+            functionTab.classList.remove('func-active');
+            el.textContent = 'Add Balance';
+            btnGroup[1].textContent = 'Add Expense';
+            btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
+            isBlncActive = false;
+            btnConfirmActive = false;
+        }
+        if (btnCancelActive && btnConfirmActive) {
+            btnGroup[1].addEventListener("click", () => {
+                functionTab.innerHTML = '';
+                optionPanel.classList.remove("active");
+                functionTab.classList.remove('func-active');
+                el.textContent = 'Add Balance';
+                btnGroup[1].textContent = 'Add Expense';
+                btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
+                isBlncActive = false;
+                btnConfirmActive = false;
+            })
+        }
+        /* else if (el == btnGroup[0] && btnConfirmActive) {
             functionTab.innerHTML = '';
             functionTab.classList.remove('func-active');
             isBlncActive = false;
-        }
-        else if (el == btnGroup[1] && !isExpsActive) {
+        } */
+        /* else if (el == btnGroup[1] && !isExpsActive) {
             functionTab.setAttribute('class', 'add-Exp');
             functionTab.removeAttribute('func-tab');
             initExpTab(functionTab);
@@ -79,6 +109,6 @@ btnGroup.forEach(el => {
             functionTab.removeAttribute('add-Exp');
             functionTab.setAttribute('class', 'func-tab');
             isExpsActive = false;
-        }
+        } */
     })
 });
