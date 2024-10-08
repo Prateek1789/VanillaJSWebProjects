@@ -11,6 +11,51 @@ let btnCancelActive = false;
 let isExpsActive = false;
 let newBalance = 0;
 
+function initExpense(container, amount, quant) {
+    const expense = document.createElement('DIV');
+    expense.setAttribute('class', 'expense');
+
+    const main = document.createElement('DIV');
+    main.setAttribute('class', 'main');
+
+    const amt = document.createElement('DIV');
+    amt.setAttribute('class', 'amt');
+    const H5 = document.createElement('H5');
+    H5.textContent = 'Amount';
+    const H5Second = document.createElement('H5');
+    const txtNode = document.createTextNode(`${amount}`);
+    const icon = document.createElement('i');
+    icon.setAttribute('class', 'bx bx-rupee');
+
+    const itm = document.createElement('DIV');
+    itm.setAttribute('class', 'itm');
+    const H6 = document.createElement('H6');
+    const H6Second = document.createElement('H6');
+
+    /* const description = document.createElement('DIV');
+    description.setAttribute('class', 'amt');
+    */
+    const del = document.createElement('DIV');
+    del.setAttribute('class', 'btn-del');
+    const iconDel = document.createElement('i');
+    iconDel.setAttribute('class', 'bx bx-trash');
+
+    container.appendChild(expense);
+    expense.appendChild(main);
+    expense.appendChild(del);
+    del.appendChild(iconDel);
+    main.appendChild(amt);
+    amt.appendChild(H5);
+    amt.appendChild(H5Second);
+    H5Second.appendChild(icon);
+    H5Second.appendChild(txtNode);
+    main.appendChild(itm);
+    itm.appendChild(H6);
+    itm.children[0].textContent = 'Items';
+    itm.appendChild(H6Second);
+    itm.children[1].textContent = quant;
+}
+
 function initBlncTab(container) {
     const heading = document.createElement('H2');
     heading.textContent = 'New Amount';
