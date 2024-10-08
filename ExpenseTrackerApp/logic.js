@@ -1,3 +1,4 @@
+const historyTab = document.querySelector(".exp-tab"); 
 const balanceAmount = document.getElementById("in-num");
 const spendAmount = document.getElementById("out-num");
 const optionPanel = document.querySelector(".options");
@@ -60,7 +61,7 @@ btnGroup.forEach(el => {
             functionTab.classList.add('func-active');
             initBlncTab(functionTab);
             el.textContent = 'Confirm';
-            btnGroup[1].textContent = 'Close';
+            btnGroup[1].textContent = 'Cancel';
             btnGroup[1].style.backgroundColor = 'var(--clr-tertiory)';
             isBlncActive = true;
             btnConfirmActive = true;
@@ -91,17 +92,38 @@ btnGroup.forEach(el => {
                 btnConfirmActive = false;
             })
         }
+        else if (el == btnGroup[1] && !isExpsActive) {
+            optionPanel.classList.add("active");
+            functionTab.setAttribute('class', 'add-Exp');
+            functionTab.removeAttribute('func-tab');
+            initExpTab(functionTab);
+            functionTab.classList.add('exp-active');
+            btnGroup[0].textContent = 'Confirm';
+            el.textContent = 'Cancel';
+            el.style.backgroundColor = 'var(--clr-tertiory)';
+            isExpsActive = true;
+            btnCancelActive = true;
+            btnConfirmActive = true;
+        }
+        /* if (el == btnGroup[1] && functionTab.children[2].value && btnConfirmActive) {
+            let newBlnc = functionTab.children[1].value;
+            newBalance += Number(newBlnc);
+            balanceAmount.textContent = newBalance;
+            functionTab.innerHTML = '';
+            optionPanel.classList.remove("active");
+            functionTab.classList.remove('func-active');
+            el.textContent = 'Add Balance';
+            btnGroup[1].textContent = 'Add Expense';
+            btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
+            isBlncActive = false;
+            btnConfirmActive = false;
+        } */
         /* else if (el == btnGroup[0] && btnConfirmActive) {
             functionTab.innerHTML = '';
             functionTab.classList.remove('func-active');
             isBlncActive = false;
         } */
-        /* else if (el == btnGroup[1] && !isExpsActive) {
-            functionTab.setAttribute('class', 'add-Exp');
-            functionTab.removeAttribute('func-tab');
-            initExpTab(functionTab);
-            functionTab.classList.add('exp-active')
-            isExpsActive = true;
+        /* 
         }
         else if (el == btnGroup[1] && isExpsActive) {
             functionTab.innerHTML = '';
