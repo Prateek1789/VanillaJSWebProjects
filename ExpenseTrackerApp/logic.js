@@ -6,11 +6,83 @@ const btnGroup = [...document.getElementsByClassName("btn")];
 const functionTab = document.querySelector(".func-tab");
 
 let isBlncActive = false;
+let isExpActive = false;
 let btnConfirmActive = false;
 let btnCancelActive = false;
-let isExpsActive = false;
 let newBalance = 0;
+let totalExpense = 0;
+let value1 = 0;
+let value2 = 0;
 
+function initAddBalanceUI(container) {
+    const heading = document.createElement('H2');
+    heading.textContent = 'New Amount';
+    const input = document.createElement('INPUT');
+    input.setAttribute('type', 'number');
+    input.setAttribute('name', 'num');
+    input.setAttribute('placeholder', '0.00');
+
+    container.appendChild(heading);
+    container.appendChild(input);
+}
+function resetAddBalanceUI() {
+    functionTab.innerHTML = '';
+    optionPanel.classList.remove("active");
+    functionTab.classList.remove('func-active');
+    // Reset Balance State
+    isBlncActive = false;
+    btnConfirmActive = false;
+    btnCancelActive = false;
+    // Reset Button text & UI
+    btnGroup[0].textContent = 'Add Balance';
+    btnGroup[1].textContent = 'Add Expense';
+    btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
+}
+function initExpTab(container) {
+    const $heading = document.createElement('H4');
+    $heading.textContent = 'Enter Amount';
+    const heading2 = document.createElement('H5');
+    heading2.textContent = 'No. of Items';
+    const heading3 = document.createElement('H5');
+    heading3.textContent = 'Description';
+    const input = document.createElement('INPUT');
+    input.setAttribute('type', 'number');
+    input.setAttribute('name', 'num');
+    input.setAttribute('placeholder', '0.00');
+    input.setAttribute('class', 'input1');
+    const input2 = document.createElement('INPUT');
+    input2.setAttribute('type', 'number');
+    input2.setAttribute('name', 'num');
+    input2.setAttribute('placeholder', '0.00');
+    input2.setAttribute('class', 'input2');
+    const textBox = document.createElement('INPUT');
+    textBox.setAttribute('type', 'text');
+    textBox.setAttribute('name', 'items');
+    textBox.setAttribute('placeholder', 'Items..');
+    textBox.setAttribute('class', 'products');
+
+    container.appendChild($heading);
+    container.appendChild(input);
+    container.appendChild(heading2);
+    container.appendChild(input2);
+    container.appendChild(heading3);
+    container.appendChild(textBox);
+}
+function resetExpenseUI() {
+    functionTab.innerHTML = '';
+    optionPanel.classList.remove("active");
+    functionTab.setAttribute('class', 'func-tab');
+    functionTab.removeAttribute('add-exp');
+    functionTab.classList.remove('exp-active');
+    // Reset button text & UI
+    btnGroup[1].textContent = 'Add Expense';
+    btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
+    btnGroup[0].textContent = 'Add Balance';
+    // Reset ExpenseUI State
+    isExpActive = false;
+    btnCancelActive = false;
+    btnConfirmActive = false;
+}
 function initExpense(container, amount, quant) {
     const expense = document.createElement('DIV');
     expense.setAttribute('class', 'expense');
@@ -56,126 +128,66 @@ function initExpense(container, amount, quant) {
     itm.children[1].textContent = quant;
 }
 
-function initBlncTab(container) {
-    const heading = document.createElement('H2');
-    heading.textContent = 'New Amount';
-    const input = document.createElement('INPUT');
-    input.setAttribute('type', 'number');
-    input.setAttribute('name', 'num');
-    input.setAttribute('placeholder', '0.00');
-
-    container.appendChild(heading);
-    container.appendChild(input);
-}
-
-function initExpTab(container) {
-    const $heading = document.createElement('H4');
-    $heading.textContent = 'Enter Amount';
-    const heading2 = document.createElement('H5');
-    heading2.textContent = 'No. of Items';
-    const heading3 = document.createElement('H5');
-    heading3.textContent = 'Description';
-    const input = document.createElement('INPUT');
-    input.setAttribute('type', 'number');
-    input.setAttribute('name', 'num');
-    input.setAttribute('placeholder', '0.00');
-    input.setAttribute('class', 'input1');
-    const input2 = document.createElement('INPUT');
-    input2.setAttribute('type', 'number');
-    input2.setAttribute('name', 'num');
-    input2.setAttribute('placeholder', '0.00');
-    input2.setAttribute('class', 'input2');
-    const textBox = document.createElement('INPUT');
-    textBox.setAttribute('type', 'text');
-    textBox.setAttribute('name', 'items');
-    textBox.setAttribute('placeholder', 'Items..');
-    textBox.setAttribute('class', 'products');
-
-    container.appendChild($heading);
-    container.appendChild(input);
-    container.appendChild(heading2);
-    container.appendChild(input2);
-    container.appendChild(heading3);
-    container.appendChild(textBox);
-}
-
 btnGroup.forEach(el => {
     el.addEventListener("click", () => {
-        if (el == btnGroup[0] && !isBlncActive && !btnConfirmActive) {
-            optionPanel.classList.add("active");
-            functionTab.classList.add('func-active');
-            initBlncTab(functionTab);
-            el.textContent = 'Confirm';
-            btnGroup[1].textContent = 'Cancel';
-            btnGroup[1].style.backgroundColor = 'var(--clr-tertiory)';
-            isBlncActive = true;
-            btnConfirmActive = true;
-            btnCancelActive = true;
+        if (el == btnGroup[0]) {
+            if (!isBlncActive && !isExpActive) {
+                // Open Balance UI
+                optionPanel.classList.add("active");
+                functionTab.classList.add('func-active');
+                initAddBalanceUI(functionTab);
+                // Update Button text & UI
+                btnGroup[0].textContent = 'Confirm';
+                btnGroup[1].textContent = 'Cancel';
+                btnGroup[1].style.backgroundColor = 'var(--clr-tertiory)';
+                // Update BalanceUI state
+                isBlncActive = true;
+                btnConfirmActive = true;
+                btnCancelActive = true;
+            }
+            else if (isBlncActive && btnConfirmActive && !isExpActive) {
+                if (functionTab.lastChild.value) {
+                    newBalance += Number(functionTab.lastChild.value);
+                    balanceAmount.textContent = newBalance;
+                    resetAddBalanceUI();
+                }
+            }
+            else if (isExpActive && btnConfirmActive && !isBlncActive) {
+                value1 = Number(functionTab.children[1].value);
+                value2 = Number(functionTab.children[3].value);
+                if (value1 && value2) {
+                    initExpense(historyTab, value1, value2);
+                    totalExpense += value1;
+                    newBalance -= value1;
+                    spendAmount.textContent = totalExpense;
+                    balanceAmount.textContent = newBalance;
+                    resetExpenseUI();
+                }
+            }
         }
-        if (el == btnGroup[0] && functionTab.children[1].value && btnConfirmActive) {
-            let newBlnc = functionTab.children[1].value;
-            newBalance += Number(newBlnc);
-            balanceAmount.textContent = newBalance;
-            functionTab.innerHTML = '';
-            optionPanel.classList.remove("active");
-            functionTab.classList.remove('func-active');
-            el.textContent = 'Add Balance';
-            btnGroup[1].textContent = 'Add Expense';
-            btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
-            isBlncActive = false;
-            btnConfirmActive = false;
+        if (el == btnGroup[1]) {
+            if (!isBlncActive && !isExpActive) {
+                // Open Expense UI
+                optionPanel.classList.add("active");
+                functionTab.setAttribute('class', 'add-Exp');
+                functionTab.removeAttribute('func-tab');
+                functionTab.classList.add('exp-active');
+                initExpTab(functionTab);
+                // Update Button Text & UI
+                btnGroup[0].textContent = 'Confirm';
+                btnGroup[1].textContent = 'Cancel';
+                btnGroup[1].style.backgroundColor = 'var(--clr-tertiory)';
+                // Update Expense UI state
+                isExpActive = true;
+                btnCancelActive = true;
+                btnConfirmActive = true;
+            }
+            else if (isBlncActive && !isExpActive) {
+                resetAddBalanceUI();
+            }
+            else if (isExpActive && !isBlncActive) {
+                resetExpenseUI();
+            }
         }
-        if (btnCancelActive && btnConfirmActive) {
-            btnGroup[1].addEventListener("click", () => {
-                functionTab.innerHTML = '';
-                optionPanel.classList.remove("active");
-                functionTab.classList.remove('func-active');
-                el.textContent = 'Add Balance';
-                btnGroup[1].textContent = 'Add Expense';
-                btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
-                isBlncActive = false;
-                btnConfirmActive = false;
-            })
-        }
-        else if (el == btnGroup[1] && !isExpsActive) {
-            optionPanel.classList.add("active");
-            functionTab.setAttribute('class', 'add-Exp');
-            functionTab.removeAttribute('func-tab');
-            initExpTab(functionTab);
-            functionTab.classList.add('exp-active');
-            btnGroup[0].textContent = 'Confirm';
-            el.textContent = 'Cancel';
-            el.style.backgroundColor = 'var(--clr-tertiory)';
-            isExpsActive = true;
-            btnCancelActive = true;
-            btnConfirmActive = true;
-        }
-        /* if (el == btnGroup[1] && functionTab.children[2].value && btnConfirmActive) {
-            let newBlnc = functionTab.children[1].value;
-            newBalance += Number(newBlnc);
-            balanceAmount.textContent = newBalance;
-            functionTab.innerHTML = '';
-            optionPanel.classList.remove("active");
-            functionTab.classList.remove('func-active');
-            el.textContent = 'Add Balance';
-            btnGroup[1].textContent = 'Add Expense';
-            btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
-            isBlncActive = false;
-            btnConfirmActive = false;
-        } */
-        /* else if (el == btnGroup[0] && btnConfirmActive) {
-            functionTab.innerHTML = '';
-            functionTab.classList.remove('func-active');
-            isBlncActive = false;
-        } */
-        /* 
-        }
-        else if (el == btnGroup[1] && isExpsActive) {
-            functionTab.innerHTML = '';
-            functionTab.classList.remove('exp-active');
-            functionTab.removeAttribute('add-Exp');
-            functionTab.setAttribute('class', 'func-tab');
-            isExpsActive = false;
-        } */
     })
-});
+})
