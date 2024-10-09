@@ -14,6 +14,42 @@ let totalExpense = 0;
 let value1 = 0;
 let value2 = 0;
 
+function morphBtnState() {
+    if (btnConfirmActive && btnCancelActive) {
+        btnGroup[0].textContent = 'Confirm';
+        btnGroup[1].textContent = 'Cancel';
+        btnGroup[1].style.backgroundColor = 'var(--clr-tertiory)';
+    }
+    else {
+        btnGroup[0].textContent = 'Add Balance';
+        btnGroup[1].textContent = 'Add Expense';
+        btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
+    }
+}
+function changeBalanceState() {
+    if (!isBlncActive && !btnConfirmActive && !btnCancelActive) {
+        isBlncActive = true;
+        btnConfirmActive = true;
+        btnCancelActive = true;
+    }
+    else {
+        isBlncActive = false;
+        btnConfirmActive = false;
+        btnCancelActive = false;
+    }
+}
+function changeExpenseState() {
+    if (!isExpActive && !btnConfirmActive && !btnCancelActive) {
+        isExpActive = true;
+        btnConfirmActive = true;
+        btnCancelActive = true;
+    }
+    else {
+        isExpActive = false;
+        btnConfirmActive = false;
+        btnCancelActive = false;
+    }
+}
 function initAddBalanceUI(container) {
     const heading = document.createElement('H2');
     heading.textContent = 'New Amount';
@@ -22,6 +58,8 @@ function initAddBalanceUI(container) {
     input.setAttribute('name', 'num');
     input.setAttribute('placeholder', '0.00');
 
+    optionPanel.classList.add("active");
+    container.classList.add('func-active')
     container.appendChild(heading);
     container.appendChild(input);
 }
@@ -29,14 +67,8 @@ function resetAddBalanceUI() {
     functionTab.innerHTML = '';
     optionPanel.classList.remove("active");
     functionTab.classList.remove('func-active');
-    // Reset Balance State
-    isBlncActive = false;
-    btnConfirmActive = false;
-    btnCancelActive = false;
-    // Reset Button text & UI
-    btnGroup[0].textContent = 'Add Balance';
-    btnGroup[1].textContent = 'Add Expense';
-    btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
+    changeBalanceState();
+    morphBtnState();
 }
 function initExpTab(container) {
     const $heading = document.createElement('H4');
@@ -61,6 +93,11 @@ function initExpTab(container) {
     textBox.setAttribute('placeholder', 'Items..');
     textBox.setAttribute('class', 'products');
 
+
+    optionPanel.classList.add("active");
+    container.setAttribute('class', 'add-Exp');
+    container.removeAttribute('func-tab');
+    container.classList.add('exp-active');
     container.appendChild($heading);
     container.appendChild(input);
     container.appendChild(heading2);
@@ -74,14 +111,8 @@ function resetExpenseUI() {
     functionTab.setAttribute('class', 'func-tab');
     functionTab.removeAttribute('add-exp');
     functionTab.classList.remove('exp-active');
-    // Reset button text & UI
-    btnGroup[1].textContent = 'Add Expense';
-    btnGroup[1].style.backgroundColor = 'var(--clr-secondary)';
-    btnGroup[0].textContent = 'Add Balance';
-    // Reset ExpenseUI State
-    isExpActive = false;
-    btnCancelActive = false;
-    btnConfirmActive = false;
+    changeExpenseState();
+    morphBtnState();
 }
 function initExpense(container, amount, quant) {
     const expense = document.createElement('DIV');
@@ -133,17 +164,11 @@ btnGroup.forEach(el => {
         if (el == btnGroup[0]) {
             if (!isBlncActive && !isExpActive) {
                 // Open Balance UI
-                optionPanel.classList.add("active");
-                functionTab.classList.add('func-active');
                 initAddBalanceUI(functionTab);
-                // Update Button text & UI
-                btnGroup[0].textContent = 'Confirm';
-                btnGroup[1].textContent = 'Cancel';
-                btnGroup[1].style.backgroundColor = 'var(--clr-tertiory)';
                 // Update BalanceUI state
-                isBlncActive = true;
-                btnConfirmActive = true;
-                btnCancelActive = true;
+                changeBalanceState();
+                // Update Button text & UI
+                morphBtnState();
             }
             else if (isBlncActive && btnConfirmActive && !isExpActive) {
                 if (functionTab.lastChild.value) {
@@ -168,19 +193,11 @@ btnGroup.forEach(el => {
         if (el == btnGroup[1]) {
             if (!isBlncActive && !isExpActive) {
                 // Open Expense UI
-                optionPanel.classList.add("active");
-                functionTab.setAttribute('class', 'add-Exp');
-                functionTab.removeAttribute('func-tab');
-                functionTab.classList.add('exp-active');
                 initExpTab(functionTab);
-                // Update Button Text & UI
-                btnGroup[0].textContent = 'Confirm';
-                btnGroup[1].textContent = 'Cancel';
-                btnGroup[1].style.backgroundColor = 'var(--clr-tertiory)';
                 // Update Expense UI state
-                isExpActive = true;
-                btnCancelActive = true;
-                btnConfirmActive = true;
+                changeExpenseState();
+                // Update Button Text & UI
+                morphBtnState()
             }
             else if (isBlncActive && !isExpActive) {
                 resetAddBalanceUI();
