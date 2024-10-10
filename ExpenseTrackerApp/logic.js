@@ -14,6 +14,7 @@ let totalExpense = 0;
 let value1 = 0;
 let value2 = 0;
 let itmArray = [];
+let expDelBtnActive = false;
 
 function morphBtnState() {
     if (btnConfirmActive && btnCancelActive) {
@@ -162,6 +163,23 @@ function initExpense(container, amount, quant, itms) {
     main.appendChild(description);
     description.appendChild(para);
     para.textContent = itms;
+    
+    !expDelBtnActive ? expDelBtnActive = true : false;
+}
+function removeExpense() {
+    if (expDelBtnActive) {
+        const removeNodes = [...document.querySelectorAll(".btn-del")];
+        removeNodes.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const expense = btn.closest('.expense');
+                expense.classList.add('expense-delete-active');
+
+                expense.addEventListener("transitionend", () => {
+                    expense.remove();
+                }, {once: true});
+            });
+        });
+    }
 }
 
 btnGroup.forEach(el => {
@@ -192,6 +210,7 @@ btnGroup.forEach(el => {
                     newBalance -= value1;
                     spendAmount.textContent = totalExpense;
                     balanceAmount.textContent = newBalance;
+                    removeExpense();
                     resetExpenseUI();
                 }
             }
