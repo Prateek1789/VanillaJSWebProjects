@@ -159,6 +159,10 @@ body {
     border-radius: 20px;
     background-color: var(--clr-bg);
     box-shadow: 1px 2px 5px var(--clr-shadow);
+    transition: 240ms ease;
+}
+.expense-delete-active {
+    transform: translateX(-110%);
 }
 .main {
     width: 85%;
