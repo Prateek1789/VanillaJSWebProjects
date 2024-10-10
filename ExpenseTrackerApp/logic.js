@@ -13,6 +13,7 @@ let newBalance = 0;
 let totalExpense = 0;
 let value1 = 0;
 let value2 = 0;
+let itmArray = [];
 
 function morphBtnState() {
     if (btnConfirmActive && btnCancelActive) {
@@ -114,7 +115,7 @@ function resetExpenseUI() {
     changeExpenseState();
     morphBtnState();
 }
-function initExpense(container, amount, quant) {
+function initExpense(container, amount, quant, itms) {
     const expense = document.createElement('DIV');
     expense.setAttribute('class', 'expense');
 
@@ -135,9 +136,10 @@ function initExpense(container, amount, quant) {
     const H6 = document.createElement('H6');
     const H6Second = document.createElement('H6');
 
-    /* const description = document.createElement('DIV');
-    description.setAttribute('class', 'amt');
-    */
+    const description = document.createElement('DIV');
+    description.setAttribute('class', 'description');
+    const para = document.createElement('P');
+   
     const del = document.createElement('DIV');
     del.setAttribute('class', 'btn-del');
     const iconDel = document.createElement('i');
@@ -157,6 +159,9 @@ function initExpense(container, amount, quant) {
     itm.children[0].textContent = 'Items';
     itm.appendChild(H6Second);
     itm.children[1].textContent = quant;
+    main.appendChild(description);
+    description.appendChild(para);
+    para.textContent = itms;
 }
 
 btnGroup.forEach(el => {
@@ -180,8 +185,9 @@ btnGroup.forEach(el => {
             else if (isExpActive && btnConfirmActive && !isBlncActive) {
                 value1 = Number(functionTab.children[1].value);
                 value2 = Number(functionTab.children[3].value);
+                itmArray = functionTab.children[5].value;
                 if (value1 && value2) {
-                    initExpense(historyTab, value1, value2);
+                    initExpense(historyTab, value1, value2, itmArray);
                     totalExpense += value1;
                     newBalance -= value1;
                     spendAmount.textContent = totalExpense;
