@@ -72,7 +72,7 @@ body {
     display: grid;
     align-content: center;
     border: none;
-    font-size: 1.6rem;
+    font-size: 2rem;
     color: #383838;
     cursor: pointer;
 }
