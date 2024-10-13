@@ -152,7 +152,8 @@ h1 span:nth-child(3) {
 }
 .task {
     width: 70%;
-    font-size: 1.4rem;
+    margin-inline: 10px;
+    font-size: 1.2rem;
     font-weight: 400;
     padding: auto;
 }
