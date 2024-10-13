@@ -127,6 +127,7 @@ h1 span:nth-child(3) {
     justify-content: space-between;
     border-radius: 30px;
     background-color: var(--clr-dark-light);
+    transition: 240ms ease;
 }
 
 .check,
@@ -155,11 +156,13 @@ h1 span:nth-child(3) {
     margin-inline: 10px;
     font-size: 1.2rem;
     font-weight: 400;
-    padding: auto;
 }
 .delete {
     font-size: 1.5rem;
 }
 .delete:hover {
     background-color: var(--clr-delete);
+}
+.delete-active {
+    transform: translateX(-300px);
 }
