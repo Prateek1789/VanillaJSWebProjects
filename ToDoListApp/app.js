@@ -4,7 +4,6 @@ const addBtn = document.querySelector(".add");
 const taskContainer = document.querySelector(".task-list-group");
 let countNum = 0;
 let istaskPresent = false;
-let isChecked = false;
 
 function initTask(elem, text) {
     const container = document.createElement('DIV');
@@ -31,24 +30,47 @@ function initTask(elem, text) {
     container.appendChild(deleteBtn);
     deleteBtn.appendChild(trashIcon);
 }
+function checkTask() {
+    let newNum = countNum;
+    const checkBtn = [...document.querySelectorAll(".check")];
+    checkBtn.forEach((itm) => {
+        if (!itm.dataset.listenerAttached) {
+            const container = itm.closest(".task-container");
+            itm.addEventListener("click", () => {
+                container.classList.toggle("container-checked");
+                /* if (container.classList.contains('container-checked')) {
+                    newNum--;
+                    countNum = newNum;
+                    count.textContent = newNum;                    
+                }
+                else {
+                    newNum++;
+                    countNum = newNum;
+                    count.textContent = newNum;
+                } */
+            });
+            itm.dataset.listenerAttached = 'true';
+        }
+    });
+}
 function deletetask() {
-    if (istaskPresent) {
-        let newNum = countNum;
-        delBtn = [...document.querySelectorAll(".delete")];
-        delBtn.forEach(elm => {
-            elm.addEventListener("click", () => {
+    let newNum = countNum;
+    delBtn = [...document.querySelectorAll(".delete")];
+    delBtn.forEach(elm => {
+        elm.addEventListener("click", () => {
+            if (countNum > 0) {
                 newNum--;
                 countNum = newNum;
                 count.textContent = newNum;
-                elm.classList.add('del-active');
-                const container = elm.closest('.task-container');
-                container.classList.add('delete-active');
-                container.addEventListener("transitionend", () => {
-                    container.remove();
-                },{once: true});
-            })
-        });
-    }
+            }
+            elm.classList.add('del-active');
+            const container = elm.closest('.task-container');
+            container.classList.add('delete-active');
+            container.addEventListener("transitionend", () => {
+                container.remove();
+            }, {once: true});
+        })
+    })
 }
 
 addBtn.addEventListener("click", () => {
@@ -60,7 +82,8 @@ addBtn.addEventListener("click", () => {
         count.textContent = countNum;
         istaskPresent = true;
     }
-    if (istaskPresent){
+    if (istaskPresent) {
+        checkTask();
         deletetask();
     }
 })
