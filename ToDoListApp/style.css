@@ -24,7 +24,7 @@ body {
 }
 .container {
     height: 850px;
-    width: 440px;
+    width: 430px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -129,7 +129,17 @@ h1 span:nth-child(3) {
     background-color: var(--clr-dark-light);
     transition: 240ms ease;
 }
-
+.container-checked {
+    .check {
+        background-color: var(--clr-accent);
+    }
+    .task {
+        text-decoration: line-through;
+    }
+}
+.delete-active {
+    transform: translateX(-400px);
+}
 .check,
 .delete {
     height: 50px;
@@ -148,7 +158,7 @@ h1 span:nth-child(3) {
     font-size: 2.5rem;
     font-weight: 800;
 }
-.check:hover {
+.checked {
     background-color: var(--clr-accent);
 }
 .task {
@@ -159,10 +169,11 @@ h1 span:nth-child(3) {
 }
 .delete {
     font-size: 1.5rem;
+    background-color: #d8370f;
 }
 .delete:hover {
     background-color: var(--clr-delete);
 }
-.delete-active {
-    transform: translateX(-300px);
+.del-active {
+    background-color: var(--clr-delete);
 }
