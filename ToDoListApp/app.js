@@ -3,7 +3,8 @@ const addTaskInput = document.querySelector("#new-task");
 const addBtn = document.querySelector(".add");
 const taskContainer = document.querySelector(".task-list-group");
 let countNum = 0;
-let taskPresent = false;
+let istaskPresent = false;
+let isChecked = false;
 
 function initTask(elem, text) {
     const container = document.createElement('DIV');
@@ -30,6 +31,25 @@ function initTask(elem, text) {
     container.appendChild(deleteBtn);
     deleteBtn.appendChild(trashIcon);
 }
+function deletetask() {
+    if (istaskPresent) {
+        let newNum = countNum;
+        delBtn = [...document.querySelectorAll(".delete")];
+        delBtn.forEach(elm => {
+            elm.addEventListener("click", () => {
+                newNum--;
+                countNum = newNum;
+                count.textContent = newNum;
+                elm.classList.add('del-active');
+                const container = elm.closest('.task-container');
+                container.classList.add('delete-active');
+                container.addEventListener("transitionend", () => {
+                    container.remove();
+                },{once: true});
+            })
+        });
+    }
+}
 
 addBtn.addEventListener("click", () => {
     const text = addTaskInput.value;
@@ -38,6 +58,9 @@ addBtn.addEventListener("click", () => {
         addTaskInput.value = '';
         countNum++;
         count.textContent = countNum;
-        taskPresent = true;
+        istaskPresent = true;
+    }
+    if (istaskPresent){
+        deletetask();
     }
 })
