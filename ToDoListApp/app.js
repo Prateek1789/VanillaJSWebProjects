@@ -1,34 +1,24 @@
 const count = document.querySelector(".count");
 const addTaskInput = document.querySelector("#new-task");
 const addBtn = document.querySelector(".add");
-const taskContainer = document.querySelector(".task-list-group");
+const taskListContainer = document.querySelector(".task-list-group");
 let countNum = 0;
 let istaskPresent = false;
 
 function initTask(elem, text) {
-    const container = document.createElement('DIV');
-    container.setAttribute('class', 'task-container');
-
-    const checkBtn = document.createElement("button");
-    checkBtn.setAttribute('class', 'check');
-    const checkMark = document.createElement("i");
-    checkMark.setAttribute('class', 'bx bx-check');
-
-    const taskContent = document.createElement("H3");
-    taskContent.setAttribute('class', 'task');
-    taskContent.textContent = text;
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.setAttribute('class', 'delete');
-    const trashIcon = document.createElement("i");
-    trashIcon.setAttribute('class', 'bx bxs-trash');
-
-    elem.appendChild(container);
-    container.appendChild(checkBtn);
-    checkBtn.appendChild(checkMark);
-    container.appendChild(taskContent);
-    container.appendChild(deleteBtn);
-    deleteBtn.appendChild(trashIcon);
+    const newTask = `
+        <div class="task-container">
+            <button class="check">
+                <i class="bx bx-check"></i>
+            </button>
+            <h3 class="task">${text}</h3>
+            <button class="delete">
+                <i class="bx bxs-trash"></i>
+            </button>
+        </div>
+    `;
+    elem.innerHTML += newTask;
+    addTaskInput.value = '';
 }
 function checkTask() {
     let newNum = countNum;
@@ -58,16 +48,12 @@ function deletetask() {
     delBtn = [...document.querySelectorAll(".delete")];
     delBtn.forEach(elm => {
         elm.addEventListener("click", () => {
-            if (countNum > 0) {
-                newNum--;
-                countNum = newNum;
-                count.textContent = newNum;
-            }
-            elm.classList.add('del-active');
             const container = elm.closest('.task-container');
-            container.classList.add('delete-active');
+            container.classList.add('container-delete-active');
             container.addEventListener("transitionend", () => {
                 container.remove();
+                countNum = [...document.querySelectorAll(".task-container")];
+                count.textContent = countNum.length;
             }, {once: true});
         })
     })
@@ -76,10 +62,9 @@ function deletetask() {
 addBtn.addEventListener("click", () => {
     const text = addTaskInput.value;
     if (text) {
-        initTask(taskContainer, text);
-        addTaskInput.value = '';
-        countNum++;
-        count.textContent = countNum;
+        initTask(taskListContainer, text);
+        countNum = [...document.querySelectorAll(".task-container")];
+        count.textContent = countNum.length;
         istaskPresent = true;
     }
     if (istaskPresent) {
