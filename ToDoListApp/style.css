@@ -5,6 +5,7 @@
     --clr-dark-light: #363636; 
     --clr-dark-absolute: #000000;
     --clr-light: #FFFFFF;
+    --clr-slate: #e0e0e0;
     --clr-accent: #ff8000;
     --clr-delete: #ff3300;
     --clr-text: #efefef;
@@ -21,6 +22,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: "Poppins", sans-serif;
+    background-color: var(--clr-slate);
 }
 .container {
     height: 850px;
@@ -137,8 +139,11 @@ h1 span:nth-child(3) {
         text-decoration: line-through;
     }
 }
-.delete-active {
+.container-delete-active {
     transform: translateX(-400px);
+    .delete {
+        background-color: var(--clr-delete);
+    }
 }
 .check,
 .delete {
@@ -158,9 +163,6 @@ h1 span:nth-child(3) {
     font-size: 2.5rem;
     font-weight: 800;
 }
-.checked {
-    background-color: var(--clr-accent);
-}
 .task {
     width: 70%;
     margin-inline: 10px;
@@ -169,11 +171,8 @@ h1 span:nth-child(3) {
 }
 .delete {
     font-size: 1.5rem;
-    background-color: #d8370f;
+    background-color: #bb3716;
 }
 .delete:hover {
-    background-color: var(--clr-delete);
-}
-.del-active {
     background-color: var(--clr-delete);
 }
