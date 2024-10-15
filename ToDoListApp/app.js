@@ -22,16 +22,15 @@ function initTask(elem, text) {
 function task_check_Delete() {
     taskListContainer.addEventListener("click", (e) => {
         let target = e.target;
+        console.log("Clicked element:", target);
         // When the target element is check button
         if (target.closest('.check')) {
             const container = target.closest(".task-container");
             container.classList.toggle("container-checked");
 
-            container.addEventListener("transitionend", () => {
-                let newCount = [...document.querySelectorAll('.container-checked')].length;
-                let finalNum = countNum - newCount;
-                count.textContent = finalNum;
-            }, {once: true});
+            let newCount = [...document.querySelectorAll('.container-checked')].length;
+            let finalNum = countNum - newCount;
+            count.textContent = finalNum;
         }
         // When the target element is delete button
         if (target.closest('.delete')) {
@@ -54,5 +53,5 @@ addBtn.addEventListener("click", () => {
         countNum = [...document.querySelectorAll(".task-container")].length;
         count.textContent = countNum;
     }
-    task_check_Delete();
 })
+task_check_Delete();
