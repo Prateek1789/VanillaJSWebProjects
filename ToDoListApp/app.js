@@ -3,7 +3,6 @@ const addTaskInput = document.querySelector("#new-task");
 const addBtn = document.querySelector(".add");
 const taskListContainer = document.querySelector(".task-list-group");
 let countNum = 0;
-let istaskPresent = false;
 
 function initTask(elem, text) {
     const newTask = `
@@ -20,42 +19,31 @@ function initTask(elem, text) {
     elem.innerHTML += newTask;
     addTaskInput.value = '';
 }
-function checkTask() {
-    let newNum = countNum;
-    const checkBtn = [...document.querySelectorAll(".check")];
-    checkBtn.forEach((itm) => {
-        if (!itm.dataset.listenerAttached) {
-            const container = itm.closest(".task-container");
-            itm.addEventListener("click", () => {
-                container.classList.toggle("container-checked");
-                /* if (container.classList.contains('container-checked')) {
-                    newNum--;
-                    countNum = newNum;
-                    count.textContent = newNum;                    
-                }
-                else {
-                    newNum++;
-                    countNum = newNum;
-                    count.textContent = newNum;
-                } */
-            });
-            itm.dataset.listenerAttached = 'true';
+function task_check_Delete() {
+    taskListContainer.addEventListener("click", (e) => {
+        let target = e.target;
+        // When the target element is check button
+        if (target.closest('.check')) {
+            const container = target.closest(".task-container");
+            container.classList.toggle("container-checked");
+
+            container.addEventListener("transitionend", () => {
+                let newCount = [...document.querySelectorAll('.container-checked')].length;
+                let finalNum = countNum - newCount;
+                count.textContent = finalNum;
+            }, {once: true});
         }
-    });
-}
-function deletetask() {
-    let newNum = countNum;
-    delBtn = [...document.querySelectorAll(".delete")];
-    delBtn.forEach(elm => {
-        elm.addEventListener("click", () => {
-            const container = elm.closest('.task-container');
+        // When the target element is delete button
+        if (target.closest('.delete')) {
+            const container = target.closest('.task-container');
             container.classList.add('container-delete-active');
+
             container.addEventListener("transitionend", () => {
                 container.remove();
-                countNum = [...document.querySelectorAll(".task-container")];
-                count.textContent = countNum.length;
+                countNum = document.querySelectorAll('.task-container').length;
+                count.textContent = countNum;
             }, {once: true});
-        })
+        }
     })
 }
 
@@ -63,12 +51,8 @@ addBtn.addEventListener("click", () => {
     const text = addTaskInput.value;
     if (text) {
         initTask(taskListContainer, text);
-        countNum = [...document.querySelectorAll(".task-container")];
-        count.textContent = countNum.length;
-        istaskPresent = true;
+        countNum = [...document.querySelectorAll(".task-container")].length;
+        count.textContent = countNum;
     }
-    if (istaskPresent) {
-        checkTask();
-        deletetask();
-    }
+    task_check_Delete();
 })
