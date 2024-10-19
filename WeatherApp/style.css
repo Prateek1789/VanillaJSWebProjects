@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --clr-light: #fefefe;
+    --clr-slate: #efefef;
+    --clr-dark: #0f0f0f;
+    --clr-accent: #0e92f0;
+    --clr-text: #FFFFFF;
+    --clr-shadow-outer: #c0c0c0;
+    --clr-shadow-inner: #d1d1d1;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--clr-slate);
+}
+.container {
+    height: 850px;
+    width: 500px;
+    padding: 1.5rem;
+    background: linear-gradient(rgb(165, 194, 215), rgb(57, 85, 110));
+    border-radius: 40px;
+    /* box-shadow: 8px 8px 14px var(--clr-shadow-outer),
+                -8px -8px 10px var(--clr-light); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 1rem;
+    color: var(--clr-text);
+    overflow-x: hidden;
+}
+.search {
+    height: 50px;
+    width: 75%;
+    border: none;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-radius: 30px;
+    
+    .search-btn,
+    .gps-Loc-btn {
+        height: 100%;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border: none;
+        color: var(--clr-slate);
+        font-size: 2rem;
+        transition: 200ms ease;
+        background-color: #819bbc8d;
+        backdrop-filter: blur(5px);
+    }
+    #search-bar {
+        height: 100%;
+        width: 70%;
+        padding: 1rem;
+        border: none;
+        border-radius: 30px 0px 0px 30px;
+        font-size: 1.25rem;
+        background-color: #819bbc8d;
+        color: var(--clr-text);
+    }
+    #search-bar::placeholder {
+        color: var(--clr-text);
+    }
+    .search-btn {
+        border-radius: 0px 25px 25px 0px;
+    }
+    .gps-Loc-btn {
+        margin-left: .2rem;
+        border-radius: 50px;
+    }
+    .search-btn:hover,
+    .gps-Loc-btn:hover {
+        color: var(--clr-text);
+    }
+}
+.current {
+    height: 230px;
+    width: 100%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+}
+.current-loc {
+    font-weight: 400;
+    /* margin-bottom: -30px; */
+}
+.current-loc i {
+    margin-right: .5rem;
+    font-size: smaller;
+}
+.temp {
+    font-size: 6.5rem;
+    font-weight: 400;
+    margin-block: -20px;
+    letter-spacing: -2px;
+}
+.condition {
+    font-weight: 400;
+}
+.hourly-forcast {
+    height: 140px;
+    width: 100%;
+    border: 1px solid blue;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    overflow-x: scroll;
+}
