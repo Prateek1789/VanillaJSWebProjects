@@ -6,8 +6,9 @@
     --clr-dark: #0f0f0f;
     --clr-accent: #0e92f0;
     --clr-text: #FFFFFF;
-    --clr-shadow-outer: #c0c0c0;
-    --clr-shadow-inner: #d1d1d1;
+    --clr-placeholder: #dededeea;
+    --clr-shadow-outer: #9f9f9f;
+    --clr-shadow-inner: #3a597b;
 }
 * {
     padding: 0;
@@ -24,62 +25,73 @@ body {
 }
 .container {
     height: 850px;
-    width: 500px;
+    width: 450px;
     padding: 1.5rem;
-    background: linear-gradient(rgb(165, 194, 215), rgb(57, 85, 110));
-    border-radius: 40px;
-    /* box-shadow: 8px 8px 14px var(--clr-shadow-outer),
-                -8px -8px 10px var(--clr-light); */
+    background: linear-gradient(rgb(169, 205, 231), rgb(57, 85, 110));
+    border-radius: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
     gap: 1rem;
     color: var(--clr-text);
     overflow-x: hidden;
 }
 .search {
-    height: 50px;
-    width: 75%;
+    height: 40px;
+    width: 70%;
     border: none;
     display: flex;
     justify-content: start;
     align-items: center;
-    border-radius: 30px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
     
+    .bxs-map {
+        width: 30px;
+        height: 40px;
+        padding-left: .5rem;
+        text-align: center;
+        display: block;
+        align-content: center;
+        font-size: 1.6rem;
+        background-color: #819bbc8d;
+        border-radius: 20px 0px 0px 20px;
+    }
     .search-btn,
     .gps-Loc-btn {
         height: 100%;
-        width: 50px;
+        width: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
         border: none;
         color: var(--clr-slate);
-        font-size: 2rem;
+        font-size: 1.6rem;
         transition: 200ms ease;
         background-color: #819bbc8d;
         backdrop-filter: blur(5px);
     }
     #search-bar {
         height: 100%;
-        width: 70%;
-        padding: 1rem;
+        width: 58%;
+        padding: .25rem;
         border: none;
-        border-radius: 30px 0px 0px 30px;
         font-size: 1.25rem;
         background-color: #819bbc8d;
         color: var(--clr-text);
     }
     #search-bar::placeholder {
-        color: var(--clr-text);
+        color: var(--clr-placeholder);
+    }
+    #search-bar:focus {
+        outline: none;
     }
     .search-btn {
         border-radius: 0px 25px 25px 0px;
     }
     .gps-Loc-btn {
-        margin-left: .2rem;
+        margin-left: .5rem;
         border-radius: 50px;
     }
     .search-btn:hover,
@@ -88,18 +100,17 @@ body {
     }
 }
 .current {
-    height: 230px;
+    height: 300px;
     width: 100%;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
-    text-align: center;
+    text-shadow: 6px 6px 10px var(--clr-shadow-inner);
 }
 .current-loc {
     font-weight: 400;
-    /* margin-bottom: -30px; */
 }
 .current-loc i {
     margin-right: .5rem;
@@ -107,14 +118,35 @@ body {
 }
 .temp {
     font-size: 6.5rem;
-    font-weight: 400;
+    font-weight: 300;
     margin-block: -20px;
     letter-spacing: -2px;
 }
 .condition {
     font-weight: 400;
 }
-.hourly-forcast {
+.temp-low {
+    margin-left: 10px;
+}
+.rain-wind-info {
+    width: 230px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.rainDrop,
+.bx-wind {
+    font-size: 2rem;
+    margin-inline: .2rem;
+}
+.rain-wind-info h3 {
+    font-size: 1.7rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+/* .hourly-forcast {
     height: 140px;
     width: 100%;
     border: 1px solid blue;
@@ -123,4 +155,4 @@ body {
     align-items: center;
     gap: .5rem;
     overflow-x: scroll;
-}
+} */
