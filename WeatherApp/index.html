@@ -7,23 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=water_drop" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="search">
+            <i class='bx bxs-map'></i>
             <input type="text" name="searchBar" id="search-bar" placeholder=" Enter Location...">
             <button class="search-btn"><i class='bx bx-search'></i></button>
             <button class="gps-Loc-btn"><i class='bx bx-current-location'></i></button>
         </div>
         <div class="current">
-            <h1 class="current-loc"><i class='bx bxs-navigation'></i>Panchkula</h1>
-            <h2 class="temp">22&deg;</h2>
-            <h3 class="condition">Clear</h3>
+            <h1 class="current-loc"><!-- <i class='bx bxs-navigation'></i> -->NA</h1>
+            <h2 class="temp">NA</h2>
+            <h3 class="condition">NA</h3>
             <span>
-                <span class="temp-high">Highest: 32&deg;</span>
-                <span class="tmep-low">Lowest: 19&deg;</span>
+                <span class="temp-high">H: NA</span>
+                <span class="temp-low">L: NA</span>
             </span>
+            <div class="rain-wind-info">
+                <h3 class="rain"><span class="material-symbols-outlined rainDrop">water_drop</span> 0mm</h3>
+                <h3 class="wind"><i class='bx bx-wind'></i> 6kph</h3>
+            </div>
         </div>
     </div>
     <script src="app.js"></script>
