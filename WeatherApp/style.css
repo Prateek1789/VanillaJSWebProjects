@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
+    --clr-text: #FFFFFF;
+    --clr-dark: #0f0f0f;
     --clr-light: #fefefe;
     --clr-slate: #efefef;
-    --clr-dark: #0f0f0f;
-    --clr-accent: #0e92f0;
-    --clr-text: #FFFFFF;
     --clr-placeholder: #dededeea;
-    --clr-shadow-outer: #9f9f9f;
-    --clr-shadow-inner: #3a597b;
+    --clr-accent-light: #4589c078;
+    --clr-accent-dark: #20386378;
+    --clr-shadow-inner: #204c7a;
+    --clr-night-gradient: #151d35 , #080b1e;
+    --clr-day-gradient: -155deg, #eae4cb, #5ca4e8 , #375c7e;
 }
 * {
     padding: 0;
@@ -28,7 +30,7 @@ body {
     width: 420px;
     padding-block: 1.5rem;
     padding-inline: 1.2rem;
-    background: linear-gradient(rgb(169, 205, 231), rgb(57, 85, 110));
+    background: linear-gradient(var(--clr-day-gradient));
     border-radius: 50px;
     display: flex;
     flex-direction: column;
@@ -36,6 +38,27 @@ body {
     gap: 1rem;
     color: var(--clr-text);
     overflow-x: hidden;
+}
+.container-active {
+    background: linear-gradient(var(--clr-night-gradient));
+
+    .current {
+        text-shadow: 0px 0px 5px var(--clr-placeholder);
+    }
+    .search {
+        .bxs-map,
+        .search-btn,
+        .gps-Loc-btn,
+        #search-bar {
+        background-color: var(--clr-accent-dark);
+        }
+    }
+    .hourly-forcast {
+        background-color: var(--clr-accent-dark);
+    }
+    .hourly-forcast .scroll-container .child {
+        text-shadow: 0px 0px 2px var(--clr-placeholder);
+    }
 }
 .search {
     height: 40px;
@@ -55,7 +78,7 @@ body {
         display: block;
         align-content: center;
         font-size: 1.6rem;
-        background-color: #819bbc8d;
+        background-color: var(--clr-accent-light);
         border-radius: 20px 0px 0px 20px;
     }
     .search-btn,
@@ -70,7 +93,7 @@ body {
         color: var(--clr-slate);
         font-size: 1.6rem;
         transition: 200ms ease;
-        background-color: #819bbc8d;
+        background-color: var(--clr-accent-light);
         backdrop-filter: blur(5px);
     }
     #search-bar {
@@ -79,7 +102,7 @@ body {
         padding: .25rem;
         border: none;
         font-size: 1.25rem;
-        background-color: #819bbc8d;
+        background-color: var(--clr-accent-light);
         color: var(--clr-text);
     }
     #search-bar::placeholder {
@@ -101,14 +124,19 @@ body {
     }
 }
 .current {
-    height: 300px;
+    height: 355px;
     width: 100%;
     border-radius: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-shadow: 6px 6px 10px var(--clr-shadow-inner);
+    text-shadow: 4px 4px 10px var(--clr-shadow-inner);
+
+    img {
+        width: 90px;
+        margin-block: 8px;
+    }
 }
 .current-loc {
     font-weight: 400;
@@ -118,7 +146,7 @@ body {
     font-size: smaller;
 }
 .temp {
-    font-size: 6.5rem;
+    font-size: 5rem;
     font-weight: 300;
     margin-block: -20px;
     letter-spacing: -2px;
@@ -131,7 +159,7 @@ body {
 }
 .rain-wind-info {
     width: 230px;
-    margin-top: 15px;
+    margin-top: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -151,16 +179,19 @@ body {
     height: 145px;
     width: 100%;
     overflow-x: auto;
-    background-color: #58729378;
+    background-color: var(--clr-accent-light);
     border-radius: 15px;
     backdrop-filter: blur(5px);
-    /* box-shadow: 2px 2px 10px var(--clr-shadow-inner); */
 
-     h3 {
+    h3 {
         font-weight: 400;
         font-size: .9rem;
         color: var(--clr-placeholder);
-        margin: 5px 0px 10px 18px;
+        margin: 8px 0px 10px 15px;
+    }
+    .bx-time {
+        margin-right: 2px;
+        transform: translateY(1px);
     }
 }
 .scroll-container {
@@ -177,9 +208,15 @@ body {
     text-align: center;
     display: grid;
     align-content: center;
-    gap: 1rem;
+    gap: .2rem;
     border-radius: 10px;
+
     h4 {
         font-weight: 500;
     }
+}
+.child > img {
+    width: 30px;
+    margin-inline: auto;
+    border-radius: 50%;
 }
