@@ -2,11 +2,7 @@ const appInterface = {
     appUI: document.querySelector(".container"),
     input: document.querySelector("#search-bar"),
     searchBtn: document.querySelector(".search-btn"),
-    city: document.querySelector(".current-loc"),
-    current_icon: document.querySelector(".current-svg"),
-    temp: document.querySelector(".temp"),
-    condition: document.querySelector(".condition"),
-    windSpeed: document.querySelector(".wind"),
+    current: document.querySelector(".current"),
     hourly_forecast: document.querySelector(".scroll-container"),
     /* gpsLoc: document.querySelector(".gps-Loc-btn") */
 }
@@ -40,6 +36,7 @@ class WeatherAPI {
             city: data.name,
             icon: data.weather[0].icon,
             temp: `${Math.round(data.main.temp)}°`,
+            rain: data.rain ? Math.round(data.rain["1h"]) : 0,
             windSpeed: Math.round(data.wind.speed * 3.6),
             condition: data.weather[0].main,
             windSpeed: Math.floor(data.wind.speed * 3.6),
@@ -73,28 +70,41 @@ class WeatherAPP {
         }
     }
     updateUI(data) {
-        appInterface.city.textContent = data.city;
-        appInterface.current_icon.setAttribute('src', `SVG/${data.icon}.svg`)
-        appInterface.temp.textContent = data.temp;
-        appInterface.condition.textContent = data.condition;
-        appInterface.windSpeed.textContent = `${data.windSpeed}kph`;
-
+        const currentWeather = `
+            <h1 class="current-loc">${data.city}</h1>
+            <img src="SVG/${data.icon}.svg" class="current-svg">
+            <h2 class="temp">${data.temp}</h2>
+            <h3 class="condition">${data.condition}</h3>
+            <!-- <div class="min_max">
+                <span class="temp-high">H: NA</span>
+                <span class="temp-low">L: NA</span>
+            </div> --!>
+            <div class="rain-wind-info">
+                <h3 class="rain"><span class="material-symbols-outlined rainDrop">water_drop</span> ${data.rain}mm</h3>
+                <h3 class="wind"><i class='bx bx-wind'></i> ${data.windSpeed}kph</h3>
+            </div>
+        `;
+        appInterface.current.innerHTML = currentWeather;
+        
         if (`${data.icon}n`) {
             appInterface.appUI.classList.add("container-active");
-        }
+        } 
     }
     updateForecastUI(data) {
         const list = data.hourly_forcaste;
-        list.forEach(elm => {
-            const weatherList = `
-                <div class="child">
-                    <h4>Now</h4>
-                    <img src="SVG/${elm.weather[0].icon}.svg" class="hourly-svg" alt="">
-                    <h4>${Math.round(elm.main.temp)}°</h4>
-                </div>
-            `;
-            appInterface.hourly_forecast.innerHTML += weatherList;
-        });
+        if (appInterface.hourly_forecast.innerHTML || !appInterface.hourly_forecast.innerHTML) {
+            appInterface.hourly_forecast.innerHTML = '';
+            list.forEach(elm => {
+                const weatherList = `
+                    <div class="child">
+                        <h4>Now</h4>
+                        <img src="SVG/${elm.weather[0].icon}.svg" class="hourly-svg" alt="">
+                        <h4>${Math.round(elm.main.temp)}°</h4>
+                    </div>
+                `;
+                appInterface.hourly_forecast.innerHTML += weatherList;
+            });
+        }
     }
 }
 
