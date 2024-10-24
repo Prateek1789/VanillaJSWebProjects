@@ -28,7 +28,8 @@ class WeatherAPI {
             return this.processWeatherData(currentData, forecastData);
         }
         catch (error) {
-            console.log(`Error fetching data: `, error);
+            appInterface.current.innerHTML = `<i class='bx bxs-error err'></i><span class="load-error">${error}</span>`;
+            appInterface.hourly_forecast.innerHTML = `<i class='bx bxs-error'></i>`;
         }
     }
     processWeatherData(data, data2) {
@@ -39,7 +40,6 @@ class WeatherAPI {
             rain: data.rain ? Math.round(data.rain["1h"]) : 0,
             windSpeed: Math.round(data.wind.speed * 3.6),
             condition: data.weather[0].main,
-            windSpeed: Math.floor(data.wind.speed * 3.6),
             hourly_forcaste: data2.list
         }
     }
@@ -86,9 +86,12 @@ class WeatherAPP {
         `;
         appInterface.current.innerHTML = currentWeather;
         
-        if (`${data.icon}n`) {
+        if (data.icon.endsWith('n')) {
             appInterface.appUI.classList.add("container-active");
         } 
+        else {
+            appInterface.appUI.classList.remove("container-active");
+        }
     }
     updateForecastUI(data) {
         const list = data.hourly_forcaste;
